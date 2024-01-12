@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Ana Webpage :D</title>
+    <h1>help</h1>
+    <h2>hello </h2>
+    <!DOCTYPE html>
+<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+    
+            canvas {
+                display: block;
+            }
+        </style>
+        <title>Interactive Moving Sphere</title>
+    </head>
+    
+    <body>
+        <canvas id="myCanvas"></canvas>
+    
+        <script>
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+    
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+    
+            // Initialize sphere properties
+            const sphere = {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                radius: 30,
+                color: '#3498db',
+                speed: 5
+            };
+    
+            // Draw the sphere
+            function drawSphere() {
+                ctx.beginPath();
+                ctx.arc(sphere.x, sphere.y, sphere.radius, 0, Math.PI * 2);
+                ctx.fillStyle = sphere.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+    
+            // Update sphere position
+            function update() {
+                if (rightPressed && sphere.x + sphere.radius < canvas.width) {
+                    sphere.x += sphere.speed;
+                }
+                if (leftPressed && sphere.x - sphere.radius > 0) {
+                    sphere.x -= sphere.speed;
+                }
+                if (upPressed && sphere.y - sphere.radius > 0) {
+                    sphere.y -= sphere.speed;
+                }
+                if (downPressed && sphere.y + sphere.radius < canvas.height) {
+                    sphere.y += sphere.speed;
+                }
+            }
+    
+            // Clear the canvas
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+    
+            // Main game loop
+            function gameLoop() {
+                clearCanvas();
+                drawSphere();
+                update();
+                requestAnimationFrame(gameLoop);
+            }
+    
+            // Handle keyboard input
+            let rightPressed = false;
+            let leftPressed = false;
+            let upPressed = false;
+            let downPressed = false;
+    
+            function keyDownHandler(e) {
+                if (e.key === 'Right' || e.key === 'ArrowRight') {
+                    rightPressed = true;
+                } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+                    leftPressed = true;
+                } else if (e.key === 'Up' || e.key === 'ArrowUp') {
+                    upPressed = true;
+                } else if (e.key === 'Down' || e.key === 'ArrowDown') {
+                    downPressed = true;
+                }
+            }
+    
+            function keyUpHandler(e) {
+                if (e.key === 'Right' || e.key === 'ArrowRight') {
+                    rightPressed = false;
+                } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+                    leftPressed = false;
+                } else if (e.key === 'Up' || e.key === 'ArrowUp') {
+                    upPressed = false;
+                } else if (e.key === 'Down' || e.key === 'ArrowDown') {
+                    downPressed = false;
+                }
+            }
+    
+            // Add event listeners
+            document.addEventListener('keydown', keyDownHandler, false);
+            document.addEventListener('keyup', keyUpHandler, false);
+    
+            // Start the game loop
+            gameLoop();
+        </script>
+    </body>
+    
+    </html>
+    
