@@ -56,7 +56,384 @@
     </section>
 
     <!-- Add more sections and content as needed -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chess Game</title>
+    <style>
+        /* Style for the chessboard squares */
+        .square {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
 
+        /* Style for alternating square colors */
+        .even {
+            background-color: #eee;
+        }
+
+        .odd {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Chess Game</h1>
+
+    <div id="chessboard"></div>
+
+    <script>
+        // Function to create a simple chessboard
+        function createChessboard() {
+            var chessboard = document.getElementById('chessboard');
+
+            for (var row = 1; row <= 8; row++) {
+                for (var col = 1; col <= 8; col++) {
+                    var square = document.createElement('div');
+                    square.className = 'square ' + (row % 2 === col % 2 ? 'even' : 'odd');
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+
+        // Call the function to create the chessboard
+        createChessboard();
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chess Game</title>
+    <style>
+        /* Styles as before */
+        .square {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        .even {
+            background-color: #eee;
+        }
+
+        .odd {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Chess Game</h1>
+
+    <div id="chessboard"></div>
+
+    <script>
+        var board = [
+            ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+            ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+        ];
+
+        function createChessboard() {
+            var chessboard = document.getElementById('chessboard');
+
+            for (var row = 0; row < 8; row++) {
+                for (var col = 0; col < 8; col++) {
+                    var square = document.createElement('div');
+                    square.className = 'square ' + ((row + col) % 2 === 0 ? 'even' : 'odd');
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+
+                    if (board[row][col] !== '') {
+                        square.textContent = board[row][col];
+                    }
+
+                    square.addEventListener('click', handleSquareClick);
+
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+
+        function handleSquareClick(event) {
+            var clickedSquare = event.target;
+            var row = parseInt(clickedSquare.dataset.row);
+            var col = parseInt(clickedSquare.dataset.col);
+
+            alert('You clicked on square ' + row + ', ' + col + '. Piece: ' + board[row][col]);
+        }
+
+        createChessboard();
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game with chessboard.js</title>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://unpkg.com/chess.js"></script>
+</head>
+<body>
+
+    <h1>Chess Game with chessboard.js</h1>
+
+    <div id="board1" style="width: 400px"></div>
+
+    <script>
+        var board1 = Chessboard('board1', {
+            draggable: true,
+            dropOffBoard: 'trash',
+            sparePieces: true
+        });
+
+        var game = new Chess();
+
+        // Update the board position after every move
+        function updateBoard() {
+            board1.position(game.fen());
+        }
+
+        // Handle move event
+        function handleMove(source, target) {
+            var move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // promote to queen for simplicity
+            });
+
+            // Check for game end conditions
+            if (game.game_over()) {
+                alert('Game Over');
+            }
+
+            updateBoard();
+        }
+
+        // Set up event handlers
+        board1.on('dragStart', function (source, piece, position, orientation) {
+            // Do not allow dragging of pieces if the game is over
+            return !game.game_over();
+        });
+
+        board1.on('drop', function (source, target) {
+            var move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // promote to queen for simplicity
+            });
+
+            // If the move is illegal, snap the piece back to its original position
+            if (move === null) {
+                return 'snapback';
+            }
+
+            updateBoard();
+        });
+
+        board1.on('move', function (source, target) {
+            handleMove(source, target);
+        });
+
+        // Initial board setup
+        updateBoard();
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game with Delayed AI Move</title>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://unpkg.com/chess.js"></script>
+</head>
+<body>
+
+    <h1>Chess Game with Delayed AI Move</h1>
+
+    <div id="board1" style="width: 400px"></div>
+
+    <script>
+        var board1 = Chessboard('board1', {
+            draggable: true,
+            dropOffBoard: 'trash',
+            sparePieces: true
+        });
+
+        var game = new Chess();
+        var playerColor = 'w'; // Player plays as White
+
+        // Update the board position after every move
+        function updateBoard() {
+            board1.position(game.fen());
+        }
+
+        // Handle player move
+        function handlePlayerMove(source, target) {
+            var move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // promote to queen for simplicity
+            });
+
+            // Check for game end conditions
+            if (game.game_over()) {
+                alert('Game Over');
+            }
+
+            updateBoard();
+
+            // If the player played as White, make AI move for Black after a delay
+            if (playerColor === 'w' && !game.game_over()) {
+                setTimeout(makeAIMove, 1000); // 1000ms delay (adjust as needed)
+            }
+        }
+
+        // Handle AI move
+        function makeAIMove() {
+            var moves = game.ugly_moves();
+            var randomMove = moves[Math.floor(Math.random() * moves.length)];
+            game.ugly_move(randomMove);
+
+            // Check for game end conditions
+            if (game.game_over()) {
+                alert('Game Over');
+            }
+
+            updateBoard();
+        }
+
+        // Set up event handlers
+        board1.on('dragStart', function (source, piece, position, orientation) {
+            // Do not allow dragging of pieces if the game is over
+            return !game.game_over();
+        });
+
+        board1.on('drop', function (source, target) {
+            handlePlayerMove(source, target);
+        });
+
+        // Initial board setup
+        updateBoard();
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game with Delayed AI Move</title>
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://unpkg.com/chess.js"></script>
+    <style>
+        /* Add this style to change the background color to pink */
+        .chessboard-63f37 {
+            background-color: #ffcccb; /* Pink color */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Chess Game with Delayed AI Move</h1>
+
+    <div id="board1" style="width: 400px"></div>
+
+    <script>
+        var board1 = Chessboard('board1', {
+            draggable: true,
+            dropOffBoard: 'trash',
+            sparePieces: true
+        });
+
+        var game = new Chess();
+        var playerColor = 'w'; // Player plays as White
+
+        // Update the board position after every move
+        function updateBoard() {
+            board1.position(game.fen());
+        }
+
+        // Handle player move
+        function handlePlayerMove(source, target) {
+            var move = game.move({
+                from: source,
+                to: target,
+                promotion: 'q' // promote to queen for simplicity
+            });
+
+            // Check for game end conditions
+            if (game.game_over()) {
+                alert('Game Over');
+            }
+
+            updateBoard();
+
+            // If the player played as White, make AI move for Black after a delay
+            if (playerColor === 'w' && !game.game_over()) {
+                setTimeout(makeAIMove, 1000); // 1000ms delay (adjust as needed)
+            }
+        }
+
+        // Handle AI move
+        function makeAIMove() {
+            var moves = game.ugly_moves();
+            var randomMove = moves[Math.floor(Math.random() * moves.length)];
+            game.ugly_move(randomMove);
+
+            // Check for game end conditions
+            if (game.game_over()) {
+                alert('Game Over');
+            }
+
+            updateBoard();
+        }
+
+        // Set up event handlers
+        board1.on('dragStart', function (source, piece, position, orientation) {
+            // Do not allow dragging of pieces if the game is over
+            return !game.game_over();
+        });
+
+        board1.on('drop', function (source, target) {
+            handlePlayerMove(source, target);
+        });
+
+        // Initial board setup
+        updateBoard();
+    </script>
+
+</body>
+</html>
+
+    </script>
+
+</body>
+</html>
 
 </body>
 </html>
