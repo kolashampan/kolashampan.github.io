@@ -1,11 +1,261 @@
-<!-- Used to get images -->
-<base href="https://chessboardjs.com/" />
-<h3 class="board">
-	Random moves
-</h3>
-<div id="board" class="board"></div>
-<br>
-<div class="info">
-	<div id="move-history" class="move-history">
-	</div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolashampan</title>
+    <style type="text/css">
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 80%;
+            font-family: sans-serif;'Century Gothic', sans-serif; /* Updated font-family */
+            background: url('https://i.imgur.com/PDXeZ6U.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family:sans-serif;'Century Gothic',}
+
+        #page {
+            min-height: 100%;
+            position: relative;
+        }
+
+        #header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Logo */
+        #logo {
+            padding: 10px;
+            width: auto;
+            float: left;
+        }
+
+        #logo h1 a, #logo h1 a:hover {
+            color: #fff;
+        text-decoration: underline overline #FFffff;
+        }
+
+        /* Header */
+        #header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+        }
+
+        #header-inner {
+            margin: 0 auto;
+            width: 970px;
+        }
+
+        /* Feature */
+        .feature {
+            background: rgba(255, 99, 180, 0.2);
+            padding: 18px;
+        }
+
+        .feature-inner {
+            margin: auto;
+            width: 970px;
+        }
+
+        .feature-inner h1 {
+            color: #fff;
+            font-size: 32px;
+        }
+
+        /* Menu */
+        #top-nav {
+            margin: 0 auto;
+            padding: 0 0 0;
+            height: 37px;
+            float: right;
+        }
+
+        #top-nav ul {
+            list-style: none;
+            padding: 0;
+            height: 37px;
+            float: left;
+        }
+
+        #top-nav ul li {
+            margin: 0;
+            padding: 0 0 0 8px;
+            float: left;
+        }
+
+        #top-nav ul li a {
+            display: block;
+            margin: 0;
+            padding: 8px 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #top-nav ul li.active a, #top-nav ul li a:hover {
+            color: #fff;
+        }
+
+        /* Content */
+        #content-inner {
+            margin: 0 auto;
+            padding: 10px 0;
+            width: 970px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #content #contentbar {
+            margin: 0;
+            padding: 0;
+            float: right;
+            width: 760px;
+        }
+
+        #content #contentbar .article {
+            margin: 0 0 24px;
+            padding: 0 20px 0 15px;
+        }
+
+        #content #sidebar {
+            padding: 0;
+            float: left;
+            width: 200px;
+        }
+
+        #content #sidebar .widget {
+            margin: 0 0 12px;
+            padding: 8px 8px 6px 13px;
+            line-height: 1.4em;
+        }
+
+        #content #sidebar .widget h3 a {
+            text-decoration: none;
+        }
+
+        #content #sidebar .widget ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: #fff;
+        }
+
+        #content #sidebar .widget ul li {
+            margin: 0;
+        }
+
+        #content #sidebar .widget ul li {
+            padding: 4px 0;
+            width: 185px;
+        }
+
+      
+        }
+
+        /* Footerblurb */
+        #footerblurb {
+            background: rgba(255, 105, 180, 0.3);
+            color: #fff;
+        }
+
+        #footerblurb-inner {
+            margin: 0 auto;
+            width: 922px;
+            padding: 24px;
+        }
+
+        #footerblurb .column {
+            margin: 0;
+            text-align: justify;
+            float: left;
+            width: 250px;
+            padding: 0 24px;
+        }
+
+        /* Footer */
+        #footer {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #footer-inner {
+            margin: auto;
+            text-align: center;
+            padding: 12px;
+            width: 922px;
+        }
+
+        #footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Clear both sides to assist with div alignment */
+        .clr {
+            clear: both;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            font-size: 0px;
+            line-height: 0px;
+        }
+
+        /* Image Style */
+        .article img {
+            max-width: 50%;
+            height: auto;
+            filter: brightness(1.2) saturate(50%) hue-rotate(-20deg);
+}
+    </style>
+    <script type="text/javascript">
+        /* =============================
+        This script generates sample text for the body content. 
+        You can remove this script and any reference to it. 
+         ============================= */
+        document.write("<p>Hello everyone! This is totally working right?</p>");
+    </script>
+</head>
+<body>
+    <div id="page">
+        <header id="header">
+            <div id="header-inner">    
+                <div id="logo">
+                    <h1><a href="#">Ana's Website<span></span></a></h1>
+                    </ul>
+                </div>
+                <div class="clr"></div>
+            </div>
+        </header>
+        <div class="feature">  <div class="feature-inner">   <h1>K O L A S H A M P A N</h1>*.·:·.✧ ✦ ✧.·:·.**.·:·.✧ ✦ ✧.·:·.*
+  *.·:·.✧ ✦ ✧.·:·.*          </div>
+        </div>
+
+        <div id="content">
+            <div id="content-inner">
+
+                <main id="contentbar">
+                    <div class="article">
+                        <p>✯¸.•´*¨`*•✿ ✿•*`¨*`•.¸✯Hello everyone! This is totally working right  ✯¸.•´*¨`*•✿ ✿•*`¨*`•.¸✯ 
+                        For this particular image I was able to change the color saturation and hues. 
+                        <img src="https://i.imgur.com/7ZztpZf.jpeg" alt="Imgur Image">
+                    </div>
+                </main>
+            
+                
+                <nav id="sidebar">
+                    <div class="widget">
+                        <h3><span>Let's have fun!</span></h3>
+                        <p>I utilized a variety of essential HTML tags to structure and present the content. I had the most fun with color, shape, location, and style tags. 
+                        <ul>
+                            
+
+
+
+                    
+                    <h2>
+                    <p>✧❁❁✧✿✿✧❁❁✧</p>
+   
