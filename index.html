@@ -6,43 +6,23 @@
     <title>Kolashampan</title>
     <style type="text/css">
 
+        /* Resetting and General Styling */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 80%;
-            font-family: sans-serif;'Century Gothic', sans-serif; /* Updated font-family */
+            height: 100%;
+            font-family: 'Century Gothic', sans-serif;
             background: url('https://i.imgur.com/PDXeZ6U.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #ff;
+            color: #fff;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family:sans-serif;'Century Gothic',}
-
-        #page {
-            min-height: 100%;
-            position: relative;
+            font-family: 'Century Gothic', sans-serif;
         }
 
-        #header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Logo */
-        #logo {
-            padding: 10px;
-            width: auto;
-            float: left;
-        }
-
-        #logo h1 a, #logo h1 a:hover {
-            color: #fff;
-        text-decoration: underline overline #FFffff;
-        }
-
-        /* Header */
+        /* Header Styling */
         #header {
             background: rgba(0, 0, 0, 0.4);
             padding: 20px;
@@ -53,7 +33,18 @@
             width: 970px;
         }
 
-        /* Feature */
+        #logo {
+            padding: 10px;
+            width: auto;
+            float: left;
+        }
+
+        #logo h1 a, #logo h1 a:hover {
+            color: #fff;
+            text-decoration: underline overline #FFffff;
+        }
+
+        /* Feature Styling */
         .feature {
             background: rgba(255, 99, 180, 0.2);
             padding: 18px;
@@ -69,25 +60,19 @@
             font-size: 32px;
         }
 
-        /* Menu */
-        #top-nav {
+        /* Navigation Styling */
+        #top-nav, #top-nav ul {
             margin: 0 auto;
-            padding: 0 0 0;
+            padding: 0;
+            list-style: none;
             height: 37px;
             float: right;
         }
 
-        #top-nav ul {
-            list-style: none;
-            padding: 0;
-            height: 37px;
-            float: left;
-        }
-
         #top-nav ul li {
-            margin: 0;
-            padding: 0 0 0 8px;
             float: left;
+            margin: 0;
+            padding: 0 8px;
         }
 
         #top-nav ul li a {
@@ -98,11 +83,11 @@
             text-decoration: none;
         }
 
-        #top-nav ul li.active a, #top-nav ul li a:hover {
+        #top-nav ul li a:hover {
             color: #fff;
         }
 
-        /* Content */
+        /* Content Styling */
         #content-inner {
             margin: 0 auto;
             padding: 10px 0;
@@ -111,10 +96,10 @@
         }
 
         #content #contentbar {
-            margin: 0;
-            padding: 0;
             float: right;
             width: 760px;
+            margin: 0;
+            padding: 0;
         }
 
         #content #contentbar .article {
@@ -123,9 +108,9 @@
         }
 
         #content #sidebar {
-            padding: 0;
             float: left;
             width: 200px;
+            padding: 0;
         }
 
         #content #sidebar .widget {
@@ -146,18 +131,11 @@
         }
 
         #content #sidebar .widget ul li {
-            margin: 0;
-        }
-
-        #content #sidebar .widget ul li {
             padding: 4px 0;
             width: 185px;
         }
 
-      
-        }
-
-        /* Footerblurb */
+        /* Footerblurb Styling */
         #footerblurb {
             background: rgba(255, 105, 180, 0.3);
             color: #fff;
@@ -170,14 +148,13 @@
         }
 
         #footerblurb .column {
-            margin: 0;
             text-align: justify;
             float: left;
             width: 250px;
             padding: 0 24px;
         }
 
-        /* Footer */
+        /* Footer Styling */
         #footer {
             background: rgba(0, 0, 0, 0.3);
         }
@@ -194,67 +171,120 @@
             text-decoration: none;
         }
 
-        /* Clear both sides to assist with div alignment */
+        /* Clearfix */
         .clr {
             clear: both;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            font-size: 0px;
-            line-height: 0px;
         }
 
-        /* Image Style */
+        /* Image Styling */
         .article img {
             max-width: 50%;
             height: auto;
             filter: brightness(1.2) saturate(50%) hue-rotate(-20deg);
-}
+        }
     </style>
-    <script type="text/javascript">
-        /* =============================
-        This script generates sample text for the body content. 
-        You can remove this script and any reference to it. 
-         ============================= */
-        document.write("<p>Hello everyone! This is totally working right?</p>");
-    </script>
 </head>
 <body>
     <div id="page">
         <header id="header">
             <div id="header-inner">    
                 <div id="logo">
-                    <h1><a href="#">Ana's Website<span></span></a></h1>
-                    </ul>
+                    <h1><a href="#">Kolashampan<span></span></a></h1>
                 </div>
+                <nav id="top-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
                 <div class="clr"></div>
             </div>
         </header>
-        <div class="feature">  <div class="feature-inner">   <h1>K O L A S H A M P A N</h1>*.·:·.✧ ✦ ✧.·:·.*U+0041 U+006E U+0061
-*.·:·.✧ ✦ ✧.·:·.*
-  *.·:·.✧ ✦ ✧.·:·.*          </div>
+        <div class="feature">  
+            <div class="feature-inner">   
+                <h1>KOLASHAMPAN</h1>
+            </div>
         </div>
 
         <div id="content">
             <div id="content-inner">
-
                 <main id="contentbar">
                     <div class="article">
-                        <p>✯¸.•´*¨`*•✿ ✿•*`¨*`•.¸✯Hello everyone! This is totally working right  ✯¸.•´*¨`*•✿ ✿•*`¨*`•.¸✯ 
-                        For this particular image I was able to change the color saturation and hues. 
+                        <p>Does it not evoke a chill, a foreboding sense of its presence?</p>
+                        <p></p>
                         <img src="https://i.imgur.com/7ZztpZf.jpeg" alt="Imgur Image">
                     </div>
                 </main>
-            
-                
                 <nav id="sidebar">
                     <div class="widget">
                         <h3><span>Let's have fun!</span></h3>
-                        <p>I utilized a variety of essential HTML tags to structure and present the content. I had the most fun with color, shape, location, and style tags. 
-                        <ul></ul>
+                        <p>I utilized a variety of essential HTML tags to structure and present the content. I had the most fun with color, shape, location, and style tags.</p>
+                    </div>
+                </nav>
+                <div class="clr"></div>
+            </div>
+        </div>
 
+        <div id="footerblurb">
+            <div id="footerblurb-inner">
+                <div class="column">
+                    <h3>Column 1</h3>
+                    <p>This is a sample text for column 1.</p>
+                </div>
+                <div class="column">
+                    <h3>Column 2</h3>
+                    <p>This is a sample text for column 2.</p>
+                </div>
+                <div class="column">
+                    <h3>Column 3</h3>
+                    <p>This is a sample text for column 3.</p>
+                </div>
+                <div class="clr"></div>
+            </div>
+        </div>
 
-                    
-                    <h2>
-                    <p>✧❁❁✧✿✿✧❁❁✧</p>
-   
+        <footer id="footer">
+            <div id="footer-inner">
+                <p>&copy; 2024 Kolashampan. All rights reserved. | Design by <a href="#">Your Name</a>.</p>
+            </div>
+        </footer>
+    </div>
+</body><!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy Picture of the Day</title>
+</head>
+<body>
+    <h1>Astronomy Picture of the Day</h1>
+    <div id="apod">
+        <img id="apod-image" src="" alt="Astronomy Picture of the Day" width="400">
+        <h2 id="apod-title"></h2>
+        <p id="apod-date"></p>
+        <p id="apod-explanation"></p>
+    </div>
+
+    <script>
+        // Fetch data from NASA's APOD API
+        fetch('https://api.nasa.gov/planetary/apod?api_key=gIRoOZuai2BY9HefdSKCa1Dwmu0dIwErWKa8AabB')
+            .then(response => response.json())
+            .then(data => {
+                // Update HTML with fetched data
+                document.getElementById('apod-image').src = data.hdurl;
+                document.getElementById('apod-title').textContent = data.title;
+                document.getElementById('apod-date').textContent = `Date: ${data.date}`;
+                document.getElementById('apod-explanation').textContent = data.explanation;
+            })
+            .catch(error => console.error('Error fetching APOD:', error));
+    </script>
+</body>
+</html>
+
+</body>
+</html>
+
+</html>
