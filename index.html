@@ -1,290 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kolashampan</title>
-    <style type="text/css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dossier_style.css">
+  <title>Kolashampan Archive</title>
+  <style>
+    body {
+      background-image: url('https://i.imgur.com/j4cs9Cz.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      opacity: 0.9; /* Adjust the opacity value as needed */
+      /* Additional styles for the body element */
+    }
+    .text-container {
+      background-color: rgba(255, 192, 203, 0.7); /* Pink color with opacity */
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    // p5.js sketch code
+    let t = [];
+    let numPoints = 75;
+    let scaleFactor = 15;
+    let speed = 0.005; // speed that dots are moving
+    let lineWeight = 1;
 
-        /* Resetting and General Styling */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Century Gothic', sans-serif;
-            background: url('https://i.imgur.com/PDXeZ6U.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
+    function setup() {
+        createCanvas(700, 700);
+        stroke(255);
+
+        // initialize t values for each dot
+        for (let i = 0; i < numPoints; i++) {
+            t.push(map(i, 0, numPoints, 0, TWO_PI)); // distribute dots evenly along the heart path
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Century Gothic', sans-serif;
-        }
+        mouseX = width/2;
+        mouseY = height/2;
+    }
 
-        /* Header Styling */
-        #header {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-        }
+    function draw() {
+        background(0);
 
-        #header-inner {
-            margin: 0 auto;
-            width: 970px;
-        }
+        // Map mouse X position to the red component (0 at left, 255 at right)
+        // Map mouse Y position to the green and blue components (255 at top, 0 at bottom)
+        let redValue = map(mouseX, 0, width, 255, 255); 
+        let greenBlueValue = map(mouseY, 0, height, 255, 0);
 
-        #logo {
-            padding: 10px;
-            width: auto;
-            float: left;
-        }
+        stroke(redValue, greenBlueValue, greenBlueValue);
 
-        #logo h1 a, #logo h1 a:hover {
-            color: #fff;
-            text-decoration: underline overline #FFffff;
-        }
+        for (let i = 0; i < numPoints; i++) {
+            // heart parametric equations with scaling
+            let x = 16 * pow(sin(t[i]), 3);
+            let y = (13 * cos(t[i]) - 5 * cos(2 * t[i]) - 2 * cos(3 * t[i]) - cos(4 * t[i]));
 
-        /* Feature Styling */
-        .feature {
-            background: rgba(255, 99, 180, 0.2);
-            padding: 18px;
-        }
+            // draw each dot, centered and scaled
+            strokeWeight(7);
+            let px = (width/2) + (scaleFactor * x);
+            let py = (height/2) - (scaleFactor * y);
+            point(px, py);
 
-        .feature-inner {
-            margin: auto;
-            width: 970px;
-        }
+            //draw line between dot and mouse
+            strokeWeight(lineWeight);
+            line(px, py, mouseX, mouseY);
 
-        .feature-inner h1 {
-            color: #fff;
-            font-size: 32px;
+            // increment t for each dot
+            t[i] += speed;
+            if (t[i] > TWO_PI) {
+                t[i] -= TWO_PI; // reset t once it completes a loop
+            }
         }
+    }
 
-        /* Navigation Styling */
-        #top-nav, #top-nav ul {
-            margin: 0 auto;
-            padding: 0;
-            list-style: none;
-            height: 37px;
-            float: right;
+    function keyPressed() {
+        if (key == ' ') { // space bar is pressed
+            // change lines to visible or not
+            lineWeight = (lineWeight == 1) ? 0 : 1; 
         }
+    }
 
-        #top-nav ul li {
-            float: left;
-            margin: 0;
-            padding: 0 8px;
-        }
-
-        #top-nav ul li a {
-            display: block;
-            margin: 0;
-            padding: 8px 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        #top-nav ul li a:hover {
-            color: #fff;
-        }
-
-        /* Content Styling */
-        #content-inner {
-            margin: 0 auto;
-            padding: 10px 0;
-            width: 970px;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        #content #contentbar {
-            float: right;
-            width: 760px;
-            margin: 0;
-            padding: 0;
-        }
-
-        #content #contentbar .article {
-            margin: 0 0 24px;
-            padding: 0 20px 0 15px;
-        }
-
-        #content #sidebar {
-            float: left;
-            width: 200px;
-            padding: 0;
-        }
-
-        #content #sidebar .widget {
-            margin: 0 0 12px;
-            padding: 8px 8px 6px 13px;
-            line-height: 1.4em;
-        }
-
-        #content #sidebar .widget h3 a {
-            text-decoration: none;
-        }
-
-        #content #sidebar .widget ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            color: #fff;
-        }
-
-        #content #sidebar .widget ul li {
-            padding: 4px 0;
-            width: 185px;
-        }
-
-        /* Footerblurb Styling */
-        #footerblurb {
-            background: rgba(255, 105, 180, 0.3);
-            color: #fff;
-        }
-
-        #footerblurb-inner {
-            margin: 0 auto;
-            width: 922px;
-            padding: 24px;
-        }
-
-        #footerblurb .column {
-            text-align: justify;
-            float: left;
-            width: 250px;
-            padding: 0 24px;
-        }
-
-        /* Footer Styling */
-        #footer {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        #footer-inner {
-            margin: auto;
-            text-align: center;
-            padding: 12px;
-            width: 922px;
-        }
-
-        #footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        /* Clearfix */
-        .clr {
-            clear: both;
-        }
-
-        /* Image Styling */
-        .article img {
-            max-width: 50%;
-            height: auto;
-            filter: brightness(1.2) saturate(50%) hue-rotate(-20deg);
-        }
-    </style>
+    function mousePressed() {
+        // change speed from normal to double & vice versa
+        speed = (speed == 0.01) ? 0.005 : 0.01; 
+    }
+  </script>
 </head>
 <body>
-    <div id="page">
-        <header id="header">
-            <div id="header-inner">    
-                <div id="logo">
-                    <h1><a href="#">Kolashampan<span></span></a></h1>
-                </div>
-                <nav id="top-nav">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="clr"></div>
-            </div>
-        </header>
-        <div class="feature">  
-            <div class="feature-inner">   
-                <h1>KOLASHAMPAN</h1>
-            </div>
-        </div>
-
-        <div id="content">
-            <div id="content-inner">
-                <main id="contentbar">
-                    <div class="article">
-                        <p>Does it not evoke a chill, a foreboding sense of its presence?</p>
-                        <p></p>
-                        <img src="https://i.imgur.com/7ZztpZf.jpeg" alt="Imgur Image">
-                    </div>
-                </main>
-                <nav id="sidebar">
-                    <div class="widget">
-                        <h3><span>Let's have fun!</span></h3>
-                        <p>I utilized a variety of essential HTML tags to structure and present the content. I had the most fun with color, shape, location, and style tags.</p>
-                    </div>
-                </nav>
-                <div class="clr"></div>
-            </div>
-        </div>
-
-        <div id="footerblurb">
-            <div id="footerblurb-inner">
-                <div class="column">
-                    <h3>Column 1</h3>
-                    <p>This is a sample text for column 1.</p>
-                </div>
-                <div class="column">
-                    <h3>Column 2</h3>
-                    <p>This is a sample text for column 2.</p>
-                </div>
-                <div class="column">
-                    <h3>Column 3</h3>
-                    <p>This is a sample text for column 3.</p>
-                </div>
-                <div class="clr"></div>
-            </div>
-        </div>
-
-        <footer id="footer">
-            <div id="footer-inner">
-                <p>&copy; 2024 Kolashampan. All rights reserved. | Design by <a href="#">Your Name</a>.</p>
-            </div>
-        </footer>
+  <div id="welcome" class="heading">
+    <h1> Digital Displacement : </h1>
+    <p>corrupting the cyberspace<p>
+  </div>
+  <div class="container">
+    <div class="welcome text-container">
+      <h1>K O L A S H A M P A N </h1>
+      <h3>Digital inequity can exacerbate existing social, economic, and educational inequalities, creating barriers to full participation in the digital age and perpetuating systemic disparities</h3>
     </div>
-</body><!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astronomy Picture of the Day</title>
-</head>
-<body>
-    <h1>Astronomy Picture of the Day</h1>
-    <div id="apod">
-        <img id="apod-image" src="" alt="Astronomy Picture of the Day" width="400">
-        <h2 id="apod-title"></h2>
-        <p id="apod-date"></p>
-        <p id="apod-explanation"></p>
+    <div class="table_contents text-container">
+      <h2>Table of Contents</h2>
+      <h1 class="colon">:</h1>
+      <ul>
+        <li><a href="#Digital Literacy"><h4>i. Digital Literacy</h4></a></li>
+        <li><a href="#Representation"><h4>ii. Representation</h4></a></li>
+        <li><a href="#Digital Divide and Representation"><h4>iii.Digital Divide and Representation</h4></a></li>
+        <li><a href="#Survaillance and Digital Panopticon"><h4>iv. Survaillance and Digital Panopticon</h4></a></li>
+        <li><a href="#Coping Mechanism"><h4>v. Coping Mechanism</h4></a></li>
+      </ul>
     </div>
-
-    <script>
-        // Fetch data from NASA's APOD API
-        fetch('https://api.nasa.gov/planetary/apod?api_key=gIRoOZuai2BY9HefdSKCa1Dwmu0dIwErWKa8AabB')
-            .then(response => response.json())
-            .then(data => {
-                // Update HTML with fetched data
-                document.getElementById('apod-image').src = data.hdurl;
-                document.getElementById('apod-title').textContent = data.title;
-                document.getElementById('apod-date').textContent = `Date: ${data.date}`;
-                document.getElementById('apod-explanation').textContent = data.explanation;
-            })
-            .catch(error => console.error('Error fetching APOD:', error));
-    </script>
+  </div>
+  <div class="container">
+    <div class="column_1 text-container">
+      <img class="thumbnail" src="https://i.imgur.com/Da150oY.jpg" alt="Image of Patricia"/>
+      <h2>O human star, burning without a flicker, perfect flame, bright and resourceful spirit. Each of your rays a great idea — O torch which passes from hand to hand, from age to age, world without end.</h2>
+    </div>
+  </div>
 </body>
-</html>
-
-</body>
-</html>
-
 </html>
