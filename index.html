@@ -1,110 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="dossier_style.css">
-  <title>Kolashampan Archive</title>
-  <style>
-    body {
-    body {
-body {
-  background-image: url('images/4cs9Cz.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  opacity: 0.9; /* Adjust the opacity value as needed */
-  /* Additional styles for the body element */
-}
-}
-    .text-container {
-      background-color: rgba(255, 192, 203, 0.7); /* Pink color with opacity */
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <script>
-    // p5.js sketch code
-    let t = [];
-    let numPoints = 75;
-    let scaleFactor = 15;
-    let speed = 0.005; // speed that dots are moving
-    let lineWeight = 1;
-
-    function setup() {
-        createCanvas(700, 700);
-        stroke(255);
-
-        // initialize t values for each dot
-        for (let i = 0; i < numPoints; i++) {
-            t.push(map(i, 0, numPoints, 0, TWO_PI)); // distribute dots evenly along the heart path
-        }
-
-        mouseX = width/2;
-        mouseY = height/2;
-    }
-
-    function draw() {
-        background(0);
-
-        // Map mouse X position to the red component (0 at left, 255 at right)
-        // Map mouse Y position to the green and blue components (255 at top, 0 at bottom)
-        let redValue = map(mouseX, 0, width, 255, 255); 
-        let greenBlueValue = map(mouseY, 0, height, 255, 0);
-
-        stroke(redValue, greenBlueValue, greenBlueValue);
-
-        for (let i = 0; i < numPoints; i++) {
-            // heart parametric equations with scaling
-            let x = 16 * pow(sin(t[i]), 3);
-            let y = (13 * cos(t[i]) - 5 * cos(2 * t[i]) - 2 * cos(3 * t[i]) - cos(4 * t[i]));
-
-            // draw each dot, centered and scaled
-            strokeWeight(7);
-            let px = (width/2) + (scaleFactor * x);
-            let py = (height/2) - (scaleFactor * y);
-            point(px, py);
-
-            //draw line between dot and mouse
-            strokeWeight(lineWeight);
-            line(px, py, mouseX, mouseY);
-
-            // increment t for each dot
-            t[i] += speed;
-            if (t[i] > TWO_PI) {
-                t[i] -= TWO_PI; // reset t once it completes a loop
-            }
-        }
-    }
-
-    function keyPressed() {
-        if (key == ' ') { // space bar is pressed
-            // change lines to visible or not
-            lineWeight = (lineWeight == 1) ? 0 : 1; 
-        }
-    }
-
-    function mousePressed() {
-        // change speed from normal to double & vice versa
-        speed = (speed == 0.01) ? 0.005 : 0.01; 
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolashampan Archive</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="CSS Style.css">
 </head>
 <body>
   <div id="welcome" class="heading">
-    <h1> Digital Displacement : </h1>
-    <p>corrupting the cyberspace<p>
+      <h1> Digital Displacement : </h1>
+      <p>corrupting the cyberspace<p>
   </div>
   <div class="container">
-    <div class="welcome text-container">
+    <div class="welcome">
       <h1>K O L A S H A M P A N </h1>
+      <br>
       <h3>Digital inequity can exacerbate existing social, economic, and educational inequalities, creating barriers to full participation in the digital age and perpetuating systemic disparities</h3>
     </div>
-    <div class="table_contents text-container">
-      <h2>Table of Contents</h2>
-      <h1 class="colon">:</h1>
+    <div class="table_contents">
+      <h2>Table of Contents</h2><h1 class="colon">:</h1>
       <ul>
         <li><a href="#Digital Literacy"><h4>i. Digital Literacy</h4></a></li>
         <li><a href="#Representation"><h4>ii. Representation</h4></a></li>
@@ -113,11 +28,11 @@ body {
         <li><a href="#Coping Mechanism"><h4>v. Coping Mechanism</h4></a></li>
       </ul>
     </div>
-  </div>
-  <div class="container">
-    <div class="column_1 text-container">
-      <img class="thumbnail" src="https://i.imgur.com/Da150oY.jpg" alt="Image of Patricia"/>
-      <h2>O human star, burning without a flicker, perfect flame, bright and resourceful spirit. Each of your rays a great idea — O torch which passes from hand to hand, from age to age, world without end.</h2>
+    <div class="column_1">
+        <br><br><br>
+        <img class="thumbnail" src="https://i.imgur.com/Da150oY.jpg" alt="Image of Patricia"/>
+        <br>
+        <h2>O human star, burning without a flicker, perfect flame, bright and resourceful spirit. Each of your rays a great idea — O torch which passes from hand to hand, from age to age, world without end.</h2>
     </div>
   </div>
 </body>
